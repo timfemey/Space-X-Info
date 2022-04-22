@@ -1,11 +1,9 @@
-import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import Rockets from "./components/Rockets";
 import TakeOffs from "./components/TakeOffs";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-// uri: "https://api.spacex.land/graphql",
+import Home from "./components/Home";
 
 function App() {
   return (
