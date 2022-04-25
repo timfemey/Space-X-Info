@@ -1,14 +1,23 @@
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
+import "./Navbar.scss";
 
 const Navbar = () => {
   return (
     <>
-      <Typography variant="h4">Navbar</Typography>
+      <nav className="nav-wrapper">
+        <Link to={"/"}>
+          {" "}
+          <Typography variant="h5">Home</Typography>
+        </Link>
 
-      <Link to={"/"}>Home</Link>
-      <Link to={"/rocket/:id"}>Rockets</Link>
-      <Link to={"/takeoffs"}>TakeOffs</Link>
+        <Link to={"/rocket/"}>
+          <Typography variant="h5">Rockets</Typography>
+        </Link>
+        <Link to={"/takeoffs"}>
+          <Typography variant="h5">TakeOffs</Typography>
+        </Link>
+      </nav>
     </>
   );
 };

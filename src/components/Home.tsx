@@ -25,7 +25,6 @@ const Home = () => {
       mounted = false;
     };
   });
-  console.log(data);
 
   return (
     <div>
