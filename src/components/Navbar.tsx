@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 import "./Navbar.scss";
+import Container from "@mui/material/Container";
 
 const Navbar = () => {
   return (

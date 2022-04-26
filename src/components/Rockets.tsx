@@ -1,8 +1,9 @@
 import { request, gql } from "graphql-request";
-import { useState, useEffect } from "react";
-import RocketFormat from "./RocketFormat";
+import { useState, SyntheticEvent, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 let mounted: boolean = true;
 const query = gql`
@@ -56,6 +57,7 @@ interface Face {
 
 const Rockets = () => {
   const [data, setData] = useState<Face | any>({});
+  const [value, setValue] = useState<number>(0);
   useEffect(() => {
     if (mounted) {
       request("https://api.spacex.land/graphql", query).then((data) => {
@@ -67,15 +69,49 @@ const Rockets = () => {
     };
   });
 
+  const handleChange = (event: SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
   return (
     <>
       {data.rockets ? (
         <center>
-          <div style={{ marginTop: "150px" }}>
-            {data.rockets?.map((a: any, b: any) => {
-              console.log(a, b);
-              <RocketFormat data={a} />;
-            })}
+          <div style={{ marginTop: "50px" }}>
+            <Box sx={{ maxWidth: { xs: 320, sm: 480 } }}>
+              <Tabs
+                value={value}
+                variant="scrollable"
+                scrollButtons
+                allowScrollButtonsMobile
+                aria-label="scrollable force tabs example"
+              >
+                {data.rockets?.map((a: any, b: any) => {
+                  return (
+                    <Tab onClick={(e) => handleChange(e, b)} label={a.name} />
+                  );
+                })}
+              </Tabs>
+              <h2>
+                {data.rockets[value].name} : {data.rockets[value].type}
+              </h2>
+              <h3>{data.rockets[value].description}</h3>
+              <ul style={{ listStyle: "none" }}>
+                <li>Height: {data.rockets[value].height.feet}</li>
+                <br />
+                <li>Engine Info:</li>
+                <br />
+                <li>Type: {data.rockets[value].engines.type}</li>
+                <br />
+                <li>
+                  Propellant 1: {data.rockets[value].engines.propellant_1}
+                </li>
+                <br />
+                <li>
+                  Propellant 2: {data.rockets[value].engines.propellant_2}
+                </li>
+              </ul>
+            </Box>
           </div>
         </center>
       ) : (

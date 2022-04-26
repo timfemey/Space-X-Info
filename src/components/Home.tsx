@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { request, gql } from "graphql-request";
 import { Typography } from "@mui/material";
 import Container from "@mui/material/Container";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 // uri: "https://api.spacex.land/graphql",
 let mounted: boolean = true;
 const query = gql`
@@ -38,7 +40,14 @@ const Home = () => {
           </Typography>
         </Container>
       ) : (
-        <h1>Loading...</h1>
+        <div style={{ marginTop: "150px" }}>
+          <center>
+            {" "}
+            <Box>
+              <CircularProgress />
+            </Box>
+          </center>
+        </div>
       )}
     </div>
   );
