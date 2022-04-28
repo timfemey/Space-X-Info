@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Key } from "react";
 import { request, gql } from "graphql-request";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
+import Cards from "./Cards";
 
 let mounted: boolean = true;
 const query = gql`
@@ -47,7 +48,25 @@ const TakeOffs = () => {
         </Typography>
       ) : data.launchesPast ? (
         <>
-          <h1>Available</h1>
+          {data.launchesPast.map(
+            (
+              val: {
+                mission_name: string;
+                launch_site: { site_name_long: string };
+                links: { flickr_images: string };
+              },
+              i: Key | null | undefined
+            ) => {
+              <Cards
+                key={i}
+                name={val.mission_name}
+                launch_site={val.launch_site.site_name_long}
+                image={
+                  val.links.flickr_images[0] ? val.links.flickr_images[0] : ""
+                }
+              />;
+            }
+          )}
         </>
       ) : (
         <>
