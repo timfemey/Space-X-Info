@@ -17,11 +17,16 @@ const query = gql`
 
 const Home = () => {
   const [data, setData] = useState<any>({});
+  const [error, setError] = useState<any>("");
   useEffect(() => {
     if (mounted) {
-      request("https://api.spacex.land/graphql", query).then((data) => {
-        setData(data);
-      });
+      request("https://api.spacex.land/graphql", query)
+        .then((data) => {
+          setData(data);
+        })
+        .catch((err) => {
+          setError(err);
+        });
     }
     return () => {
       mounted = false;
@@ -30,7 +35,11 @@ const Home = () => {
 
   return (
     <div>
-      {data.company?.summary ? (
+      {error ? (
+        <Typography pt={4} textAlign={"center"} variant="h2">
+          Network Error Occured
+        </Typography>
+      ) : data.company?.summary ? (
         <Container maxWidth="sm">
           <Typography pt={4} textAlign={"center"} variant="h2">
             {data.company.name}

@@ -4,6 +4,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import { Typography } from "@mui/material";
 
 let mounted: boolean = true;
 const query = gql`
@@ -58,11 +59,16 @@ interface Face {
 const Rockets = () => {
   const [data, setData] = useState<Face | any>({});
   const [value, setValue] = useState<number>(0);
+  const [error, setError] = useState<any>("");
   useEffect(() => {
     if (mounted) {
-      request("https://api.spacex.land/graphql", query).then((data) => {
-        setData(data);
-      });
+      request("https://api.spacex.land/graphql", query)
+        .then((data) => {
+          setData(data);
+        })
+        .catch((err) => {
+          setError(err);
+        });
     }
     return () => {
       mounted = false;
@@ -75,7 +81,11 @@ const Rockets = () => {
 
   return (
     <>
-      {data.rockets ? (
+      {error ? (
+        <Typography pt={4} textAlign={"center"} variant="h2">
+          Network Error Occured
+        </Typography>
+      ) : data.rockets ? (
         <center>
           <div style={{ marginTop: "50px" }}>
             <Box sx={{ maxWidth: { xs: 320, sm: 480 } }}>
