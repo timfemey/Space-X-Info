@@ -23,4 +23,3 @@ jobs:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: "space-x-inform"
         heroku_email: "isholaobafemi@gmail.com"
-        healthcheck: "https://space-x-inform.herokuapp.com/health"
