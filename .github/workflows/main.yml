@@ -2,27 +2,27 @@ name: Main Workflow
 
 on:
   push:
-    branches: [main]
+    branches: [ master ]
 
-  jobs:
-    build:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - name: Node.js Setup
-          uses: actions/setup-node@v2
-          with:
-            node-version: "14.x"
-          - name: Install Dependencies
-            run: npm install
-    deploy:
-      runs-on: ubuntu-latest
-      needs: [build]
-      steps:
-        - uses: actions/checkout@v2
-        - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Node.js Setup
+        uses: actions/setup-node@v2
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "space-x-inform"
-          heroku_email: "isholaobafemi@gmail.com"
-          healthcheck: "https://space-x-inform.herokuapp.com/health"
+          node-version: "14.x"
+      - name: Install Dependencies
+        run: npm install
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "space-x-inform"
+        heroku_email: "isholaobafemi@gmail.com"
+        healthcheck: "https://space-x-inform.herokuapp.com/health"
