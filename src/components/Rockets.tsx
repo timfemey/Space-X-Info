@@ -96,9 +96,13 @@ const Rockets = () => {
                 allowScrollButtonsMobile
                 aria-label="scrollable force tabs example"
               >
-                {data.rockets?.map((a: any, b: any) => {
+                {data.rockets?.map((a: any, b: number) => {
                   return (
-                    <Tab onClick={(e) => handleChange(e, b)} label={a.name} />
+                    <Tab
+                      key={b}
+                      onClick={(e) => handleChange(e, b)}
+                      label={a.name}
+                    />
                   );
                 })}
               </Tabs>
