@@ -17,7 +17,7 @@ const query = gql`
         article_link
         flickr_images
       }
-      id
+      details
     }
   }
 `;
@@ -47,27 +47,45 @@ const TakeOffs = () => {
           Network Error Occured
         </Typography>
       ) : data.launchesPast ? (
-        <>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            marginTop: "10px",
+          }}
+        >
           {data.launchesPast.map(
             (
               val: {
                 mission_name: string;
                 launch_site: { site_name_long: string };
-                links: { flickr_images: string };
+                links: { flickr_images: string[]; article_link: string };
+                details: string;
               },
               i: Key | null | undefined
             ) => {
-              <Cards
-                key={i}
-                name={val.mission_name}
-                launch_site={val.launch_site.site_name_long}
-                image={
-                  val.links.flickr_images[0] ? val.links.flickr_images[0] : ""
-                }
-              />;
+              return (
+                <Cards
+                  key={i}
+                  name={val.mission_name}
+                  launch_site={val.launch_site.site_name_long}
+                  image={
+                    val.links.flickr_images[0]
+                      ? val.links.flickr_images[0]
+                      : "https://cdn.shopify.com/s/files/1/0261/2615/5855/files/SpaceX_Store_Header_8bea78f5-04fb-49cd-8fa7-62b9c50b980d_1400x.jpg?v=1566589024"
+                  }
+                  article={
+                    val.links.article_link
+                      ? val.links.article_link
+                      : "https://www.google.com"
+                  }
+                  details={val.details}
+                />
+              );
             }
           )}
-        </>
+        </div>
       ) : (
         <>
           <center>
