@@ -2,7 +2,7 @@
 
 ## Preview:
 
-[![spacex.gif](https://s8.gifyu.com/images/spacex.gif)](https://gifyu.com/image/SsEro)
+[![spacex-min.gif](https://s8.gifyu.com/images/spacex-min.gif)](https://gifyu.com/image/SsEtL)
 
 # Getting Started with Create React App
 
