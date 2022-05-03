@@ -2,6 +2,8 @@
 
 ## Preview:
 
+[![spacex.gif](https://s8.gifyu.com/images/spacex.gif)](https://gifyu.com/image/SsEro)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
