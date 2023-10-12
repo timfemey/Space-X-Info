@@ -1,6 +1,5 @@
 # Space-X-Info
 
-### Link: https://space-x-info.web.app
 
 ## Preview:
 
